@@ -1,34 +1,10 @@
-import React, { useReducer, useContext } from "react";
-import CounterContext from "./CounterContext";
-
-const Display = () => {
-	const [counter] = useContext(CounterContext);
-	return <div>{counter}</div>;
-};
-
-const Button = ({ type, label }) => {
-	const [counter, dispatch] = useContext(CounterContext);
-	return <button onClick={() => dispatch({ type })}>{label}</button>;
-};
-
-const counterReducer = (state, action) => {
-	switch (action.type) {
-		case "INC":
-			return state + 1;
-		case "DEC":
-			return state - 1;
-		case "ZERO":
-			return 0;
-		default:
-			return state;
-	}
-};
+import React from "react";
+import Display from "./components/Display";
+import Button from "./components/Button";
 
 const App = () => {
-	const [counter, counterDispatch] = useReducer(counterReducer, 0);
-
 	return (
-		<CounterContext.Provider value={[counter, counterDispatch]}>
+		<div>
 			<Display />
 			<div>
 				<Button
@@ -44,7 +20,7 @@ const App = () => {
 					label="0"
 				/>
 			</div>
-		</CounterContext.Provider>
+		</div>
 	);
 };
 
